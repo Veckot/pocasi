@@ -50,4 +50,10 @@ class Pocasi extends BaseController
         
         echo view('station', $dataS);
     }
+    public function stranka2($idZeme): string
+    {
+        $dataSt['station'] = $this->station->where('bundesland', $idZeme)->findAll();
+        $dataSt['bundesland'] = $this->bundesland->find($idZeme);
+        return view('stranka2', $dataSt);
+    }
 }
