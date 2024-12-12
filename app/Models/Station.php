@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Station extends Model
 {
-    protected $table            = 'Station';
+    protected $table            = 'station';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';

@@ -3,57 +3,57 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Bundesland;
 use App\Models\Data;
 use App\Models\Station;
 
-
 class Pocasi extends BaseController
 {
-    var $bundesland;
-    var $data;
-    var $station;
+    private $bundesland;
+    private $data;
+    private $station;
+
     public function __construct()
     {
         $this->bundesland = new Bundesland();
         $this->data = new Data();
         $this->station = new Station();
     }
-    
+
     public function index()
     {
         $dataB['bundesland'] = $this->bundesland->findAll();
-        
-        echo view('stranka1', $dataB);
+        return view('stranka1', $dataB);
     }
+
     public function Stanice($idZeme)
     {
-        echo view('stranka2');
-        $dataS["station"] = $this->station->findAll();
+        $dataS['station'] = $this->station->where('bundesland', $idZeme)->findAll();
+        $dataS['bundesland'] = $this->bundesland->find($idZeme);
+        return view('stranka2', $dataS);
     }
+
     public function bundesland()
     {
         $dataB['bundesland'] = $this->bundesland->findAll();
-        
-        echo view('bundesland', $dataB);
+        return view('bundesland', $dataB);
     }
+
     public function data()
     {
-        $dataD["data"] = $this->data->findAll();;
-        
-        echo view('data', $dataD);
+        $dataD['data'] = $this->data->findAll();
+        return view('data', $dataD);
     }
+
     public function station()
     {
-        $dataS["station"] = $this->station->findAll();;
-        
-        echo view('station', $dataS);
+        $dataS['station'] = $this->station->findAll();
+        return view('station', $dataS);
     }
-    public function stranka2($idZeme): string
+    public function stranka2($idBund)
     {
-        $dataSt['station'] = $this->station->where('bundesland', $idZeme)->findAll();
-        $dataSt['bundesland'] = $this->bundesland->find($idZeme);
-        return view('stranka2', $dataSt);
+        $stationData['station'] = $this->station->where('bundesland', $idBund)->findAll();
+        $stationData['data'] = $this->data->where('bundesland', $idBund)->findAll();
+        return view('station_detail', $stationData);
     }
 }
