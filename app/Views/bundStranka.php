@@ -12,13 +12,13 @@ $table->setHeading($headers);
 
 foreach ($bundesland as $row) {
     $imgFlag = array(
-        "src" => "img/flag/Flag_".$row->short_name.".png",
+        "src" => "img/flag/".$row->flag_id,
         "alt" => "",
         "class" => "img-fluid",
         "style" => "width: 120%; height: auto;"
     );
     $imgMap = array(
-        "src" => "img/map/Map_".$row->short_name.".png",
+        "src" => "img/map/".$row->map_id,
         "alt" => "",
         "class" => "img-fluid",
         "style" => "width: 60px; height: auto;"
@@ -27,7 +27,7 @@ foreach ($bundesland as $row) {
     // Add a row with data
     $table->addRow(
         $row->id, 
-        anchor("stranka2/".$row->id, $row->name), 
+        anchor("bund_stationStranka/".$row->id, $row->name), 
         $row->short_name, 
         img($imgMap), 
         img($imgFlag)

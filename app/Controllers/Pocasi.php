@@ -23,14 +23,14 @@ class Pocasi extends BaseController
     public function index()
     {
         $dataB['bundesland'] = $this->bundesland->findAll();
-        return view('stranka1', $dataB);
+        return view('bundStranka', $dataB);
     }
 
     public function Stanice($idZeme)
     {
         $dataS['station'] = $this->station->where('bundesland', $idZeme)->findAll();
         $dataS['bundesland'] = $this->bundesland->find($idZeme);
-        return view('stranka2', $dataS);
+        return view('bund_stationStranka', $dataS);
     }
 
     public function bundesland()
@@ -50,10 +50,17 @@ class Pocasi extends BaseController
         $dataS['station'] = $this->station->findAll();
         return view('station', $dataS);
     }
-    public function stranka2($idBund)
+    public function bund_stationStranka($idBund)
     {
+        $stationData['bundesland'] = $this->bundesland->find($idBund);
         $stationData['station'] = $this->station->where('bundesland', $idBund)->findAll();
-        $stationData['data'] = $this->data->where('bundesland', $idBund)->findAll();
-        return view('station_detail', $stationData);
+        $stationData['data'] = $this->data->where('Stations_ID', $idBund)->findAll();
+        return view('bund_stationStranka', $stationData);
+    }
+    public function station_dataStranka($idStation)
+    {
+        $dataData['station'] = $this->station()->find($idStation);
+        $dataData['data'] = $this->station->where('data', $idStation)->findAll();
+        return view('station_dataStranka', $dataData);
     }
 }

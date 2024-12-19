@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Station extends Model
 {
     protected $table            = 'station';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'S_ID';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
