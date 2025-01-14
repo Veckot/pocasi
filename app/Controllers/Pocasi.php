@@ -50,17 +50,33 @@ class Pocasi extends BaseController
         $dataS['station'] = $this->station->findAll();
         return view('station', $dataS);
     }
+
     public function bund_stationStranka($idBund)
     {
         $stationData['bundesland'] = $this->bundesland->find($idBund);
         $stationData['station'] = $this->station->where('bundesland', $idBund)->findAll();
-        $stationData['data'] = $this->data->where('Stations_ID', $idBund)->findAll();
         return view('bund_stationStranka', $stationData);
     }
+
     public function station_dataStranka($idStation)
     {
-        $dataData['station'] = $this->station()->find($idStation);
-        $dataData['data'] = $this->station->where('data', $idStation)->findAll();
+        $dataData['station'] = $this->station->find($idStation);
+
+        $pager = \Config\Services::pager();
+        $total = $this->data->where('Stations_ID', $idStation)->countAllResults();
+
+        $perPage = 25;
+        $page = $this->request->getVar('page') ?? 1;
+
+        $offset = ($page - 1) * $perPage;
+        $dataData['data'] = $this->data
+            ->where('Stations_ID', $idStation)
+            ->findAll($perPage, $offset);
+
+        // Generate pagination links
+        $dataData['pagination'] = $pager->makeLinks($page, $perPage, $total, 'default_full');
+
+        // Pass the pagination data to the view
         return view('station_dataStranka', $dataData);
     }
-}
+    }

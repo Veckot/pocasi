@@ -8,22 +8,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Přehled stanic ve spolkové zemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .flag-img {
+            width: 10%;
+            height: auto;
+            margin-left: 10px;
+        }
 
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="my-4">Přehled meteorologických stanic ve spolkové zemi: <?= $bundesland->name; ?></h1>
+    <?php
+    $imgFlag = array(
+        "src" => base_url("img/flag/" . $bundesland->flag_id), // Ensure the image path is correct
+        "alt" => "Vlajka " . $bundesland->name,
+        "class" => "flag-img"
+    );
+    ?>
+    <div class="container my-5">
+        <h1 class="mb-4">
+            Přehled meteorologických stanic ve spolkové zemi:
+            <?= $bundesland->name; ?>
+            <?= img($imgFlag); ?>
+        </h1>
 
         <div class="row">
             <?php foreach ($station as $stanice): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="card-title"><?= anchor("station_dataStranka/".$stanice->S_ID, $stanice->place); ?></h5>
-                            <p class="card-text"><strong>Zeměpisná šířka:</strong> <?= $stanice->geo_latitude; ?></p>
-                            <p class="card-text"><strong>Zeměpisná délka:</strong> <?= $stanice->geo_longtitude; ?></p>
-                            <p class="card-text"><strong>Nadm. výška:</strong> <?= $stanice->height; ?> m</p>
+                            <h5 class="card-title">
+                                <?= anchor("station_dataStranka/" . $stanice->S_ID, $stanice->place); ?>
+                            </h5>
+                            <p class="card-text">
+                                <strong>Zeměpisná šířka:</strong> <?= $stanice->geo_latitude; ?>
+                            </p>
+                            <p class="card-text">
+                                <strong>Zeměpisná délka:</strong> <?= $stanice->geo_longtitude; ?>
+                            </p>
+                            <p class="card-text">
+                                <strong>Nadm. výška:</strong> <?= $stanice->height; ?> m
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -31,7 +80,7 @@
         </div>
     </div>
 
-    <?= $this->include("layout/js");?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
