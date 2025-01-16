@@ -2,7 +2,7 @@
 <?= $this->section("content"); ?>
 
 <div class="container my-5">
-    <h1 class="mb-4">Stanice <?= $station->S_ID; ?></h1>
+    <h1 class="mb-4">Stanice <?= $station->place; ?></h1>
 
     <style>
         .pagination {
@@ -68,7 +68,7 @@
     foreach ($data as $row) {
         $table->addRow(
             $row->id,
-            $row->date,
+            date('d. m. Y', strtotime($row->date)),
             $row->quality,
             $row->humidity,
             $row->mid_wind,

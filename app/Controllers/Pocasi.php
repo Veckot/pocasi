@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Bundesland;
 use App\Models\Data;
 use App\Models\Station;
+use App\Models\StationModel;
 
 class Pocasi extends BaseController
 {
@@ -57,6 +58,11 @@ class Pocasi extends BaseController
         $stationData['station'] = $this->station->where('bundesland', $idBund)->findAll();
         return view('bund_stationStranka', $stationData);
     }
+    public function allStation()
+{
+    $data['station'] = $this->station->join('bundesland','station.bundesland=bundesland.id','left')->findAll();
+    return view('allStation', $data);
+}
 
     public function station_dataStranka($idStation)
     {
