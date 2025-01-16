@@ -60,7 +60,7 @@
             ); ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100">
-                    <img <?= img($imgFlag); ?> class="card-img-top" alt="<?= esc($imgFlag['alt']); ?>">
+                    <img <?= img($imgFlag); ?>
                     <div class="card-body">
                         <h5 class="card-title">
                             <?= anchor("station_dataStranka/" . $stanice->S_ID, $stanice->place); ?>
