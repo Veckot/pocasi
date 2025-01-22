@@ -56,7 +56,7 @@
                 "src" => base_url("img/flag/" . $stanice->flag_id), // Ensure the image path is correct
                 "alt" => "Vlajka",
                 "class" => "flag-img img-fluid", // Use Bootstrap's img-fluid class for responsiveness
-                "style" => "width: 100%; height: auto;" // Full width and maintain aspect ratio
+                "style" => "width: 95%; height: auto; margin-top: 10px;" // Full width and maintain aspect ratio
             ); ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100">
