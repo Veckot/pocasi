@@ -62,7 +62,7 @@
 
     <?php
     $table = new \CodeIgniter\View\Table();
-    $headers = array('Id', 'Datum', 'Kvalita', 'Vlhkost', 'Mid vítr', 'Max vítr');
+    $headers = array('Id', 'Datum', 'Kvalita', 'Vlhkost', 'Mid vítr', 'Max vítr', 'Amplituda');
     $table->setHeading($headers);
 
     foreach ($data as $row) {
@@ -72,7 +72,8 @@
             $row->quality,
             $row->humidity,
             $row->mid_wind,
-            $row->max_wind
+            $row->max_wind,
+            $row->max_2m-$row->min_2m
         );
     }
 

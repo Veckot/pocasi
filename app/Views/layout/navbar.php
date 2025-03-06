@@ -12,10 +12,10 @@
                 );
             ?>
               <li class="nav-item">
-              <?= anchor('/', 'Seznam Nacistickych Regionu', $nav); ?>
+              <?= anchor('/', 'Germanske regiony', $nav); ?>
               </li>
               <li class="nav-item">
-                <?= anchor('allStation', 'Nacisticke Laboratorie', $nav); ?></a>
+                <?= anchor('allStation', 'Funny Laboratorie', $nav); ?></a>
               </li>
             </ul>
           </div>
